@@ -1,13 +1,6 @@
 # Example REST Backend
 
-Spring Boot REST backend with MySQL, ready for Docker.
+Choose a language:
 
-## Run with Docker
-
-```bash
-docker compose up --build
-```
-
-API:
-
-- GET <http://localhost:8080/api/health>
+- 한국어: [README.ko.md](README.ko.md)
+- English: [README.en.md](README.en.md)
