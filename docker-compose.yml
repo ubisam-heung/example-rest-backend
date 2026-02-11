@@ -1,0 +1,41 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: example-rest-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: heung_db
+      MYSQL_USER: heung
+      MYSQL_PASSWORD: heung
+      MYSQL_ROOT_PASSWORD: root_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  backend:
+    build: .
+    container_name: example-rest-backend
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: heung_db
+      DB_USER: heung
+      DB_PASSWORD: heung
+      FRONTEND_ORIGIN: http://localhost:5173
+    ports:
+      - "8080:8080"
+
+volumes:
+  mysql_data:
