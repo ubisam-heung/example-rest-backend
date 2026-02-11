@@ -19,6 +19,10 @@ public class AdminSeeder {
       }
 
       User admin = new User(username, email, passwordEncoder.encode("heung"), "ROLE_ADMIN");
+      Long nextId = userRepository.findNextAvailableId();
+      if (nextId != null) {
+        admin.setId(nextId);
+      }
       userRepository.save(admin);
     };
   }
