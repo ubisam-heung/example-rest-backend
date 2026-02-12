@@ -53,6 +53,7 @@ public class AuthController {
     return buildAuthResponse(tokens);
   }
 
+  @SuppressWarnings("null")
   private ResponseEntity<AuthResponse> buildAuthResponse(AuthTokens tokens) {
     ResponseCookie cookie = ResponseCookie.from("refresh_token", tokens.refreshToken())
       .httpOnly(true)

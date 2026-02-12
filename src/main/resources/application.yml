@@ -25,6 +25,9 @@ logging:
 app:
   cors:
     allowed-origins: ${FRONTEND_ORIGIN:http://localhost:5173}
+  ollama:
+    base-url: ${OLLAMA_BASE_URL:http://host.docker.internal:11434}
+    model: ${OLLAMA_MODEL:llama3.1:8b-instruct-q4_0}
   jwt:
     secret: ${JWT_SECRET:heungubisam-local-dev-secret-32bytes-min}
     access-expiration-ms: ${JWT_ACCESS_EXPIRATION_MS:1800000}
