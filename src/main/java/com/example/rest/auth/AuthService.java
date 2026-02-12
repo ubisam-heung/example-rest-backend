@@ -57,10 +57,6 @@ public class AuthService {
       passwordEncoder.encode(request.password()),
       "ROLE_USER"
     );
-    Long nextId = userRepository.findNextAvailableId();
-    if (nextId != null) {
-      user.setId(nextId);
-    }
     userRepository.save(user);
 
     String accessToken = jwtService.generateAccessToken(user.getUsername());
